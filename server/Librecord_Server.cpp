@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
 	wsaerr = WSAStartup(wVersionRequested, &wsaData);
 	if (wsaerr != 0)
 	{
-		cout << "Error : Winsock dll NOT found ! " << endl;
-		return 0;
+		cout << "Erreur fatale : Winsock dll INtrouvable ! " << endl;
+		return 1;
 	}
 	else
 	{
@@ -38,9 +38,9 @@ int main(int argc, char* argv[])
 	serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (serverSocket == INVALID_SOCKET)
 	{
-		cout << "Error at socket(): " << WSAGetLastError() << endl;
+		cout << "Erreur fatale lors de la création de socket(): " << WSAGetLastError() << endl;
 		WSACleanup();
-		return 0;
+		return 2;
 	}
 	else
 	{
@@ -54,31 +54,32 @@ int main(int argc, char* argv[])
 	service.sin_port = htons(port);
 	if (bind(serverSocket, (SOCKADDR*)&service, sizeof(service)) == SOCKET_ERROR)
 	{
-		cout << "bind() failed : " << WSAGetLastError() << endl;
+		cout << "Erreur fatale : bind() échoué : " << WSAGetLastError() << endl;
 		closesocket(serverSocket);
 		WSACleanup();
-		return 0;
+		return 4;
 	}
 	else
 	{
-		cout << "Bind() is OK ! " << endl;
+		cout << "Bind() OK ! " << endl;
 	}
 
 	//ETAPE 4 : Mise en écoute du server 
 	if (listen(serverSocket, 1) == SOCKET_ERROR)
-		cout << "listen() : Error listening on socket" << WSAGetLastError() << endl;
+		cout << "listen() : Erreur lors de l'écoute sur le socket" << WSAGetLastError() << endl;
+		// C'est pas une erreur fatale où il faut quitter le programme ça ?
 	else
-		cout << "listen() is OK, I'm waiting for connections... " << endl;
+		cout << "listen() OK, en attente de connexions" << endl;
 
 	//ETAPE 5 : Acceptation de la connexion client 
 	acceptSocket = accept(serverSocket, NULL, NULL);
 	if (acceptSocket == INVALID_SOCKET)
 	{
-		cout << "accept failed " << WSAGetLastError() << endl;
+		cout << "Erreur fatale lors de l'acceptions de la connexion avec le client distant" << WSAGetLastError() << endl;
 		WSACleanup();
-		return -1;
+		return 5;
 	}
-	cout << "Accepted conection" << endl;
+	cout << "Connexion acceptée" << endl;
 	system("pause");
 	WSACleanup();
 
