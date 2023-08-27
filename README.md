@@ -5,16 +5,16 @@ La messagerie du futur entièrement sécurisée et chiffrée.
 
 ### Côté serveur
 
- [x] Le serveur reçoit les messages
- [] Le serveur conserve les messages selon le format indiqué dans la documentation (il faut le faire tout de suite sinon ça va être compliqué de l'intégrer plus tard, parce que une architecture où tout fonctionne sans stockage ne demande pas de faire des processus d'actualisation des messages au niveau du client, ce qui demande des changement majeurs dans le code)
- [] Le serveur est compatible linux
+ - [x] Le serveur reçoit les messages
+ - [ ] Le serveur conserve les messages selon le format indiqué dans la documentation (il faut le faire tout de suite sinon ça va être compliqué de l'intégrer plus tard, parce que une architecture où tout fonctionne sans stockage ne demande pas de faire des processus d'actualisation des messages au niveau du client, ce qui demande des changement majeurs dans le code)
+ - [ ] Le serveur est compatible linux
 
 ### Côté client
 
- [x] Compatible windows
- [] Compatible linux (parce que j'en ai besoin et qu'il faut le faire tout de suite sinon une fois qu'il y aura trop de code à modifier, ce sera l'enfer)
- [x] Peut envoyer un message
- [] Peut télécharger les messages du serveur, avec la possibilité de choisir combien de message l'on souhaite télécharger
+ - [x] Compatible windows
+ - [ ] Compatible linux (parce que j'en ai besoin et qu'il faut le faire tout de suite sinon une fois qu'il y aura trop de code à modifier, ce sera l'enfer)
+ - [x] Peut envoyer un message
+ - [ ] Peut télécharger les messages du serveur, avec la possibilité de choisir combien de message l'on souhaite télécharger
 
 ## Problèmes connus sur le pdf
 
