@@ -5,6 +5,8 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <tchar.h>
+#define addrServ "127.0.0.1"
+#define port 55555
 //#include "stdafx.h"
 
 using namespace std;
@@ -17,7 +19,6 @@ int main(int argc, char* argv[])
 
 	//ETAPE 1 : initialisation de la librairie et téléchargement de la dll de Winsock
 	SOCKET serverSocket, acceptSocket;
-	int port = 55555;
 	WSADATA wsaData;
 	int wsaerr;
 	WORD wVersionRequested = MAKEWORD(2, 2);
@@ -50,7 +51,7 @@ int main(int argc, char* argv[])
 	//ETAPE 3 : Mise en relation du port et de l'IP
 	sockaddr_in service;
 	service.sin_family = AF_INET;
-	InetPton(AF_INET, _T("127.0.0.1"), &service.sin_addr.s_addr);
+	InetPton(AF_INET, _T(addrServ), &service.sin_addr.s_addr);
 	service.sin_port = htons(port);
 	if (bind(serverSocket, (SOCKADDR*)&service, sizeof(service)) == SOCKET_ERROR)
 	{
