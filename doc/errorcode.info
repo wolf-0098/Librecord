@@ -1,0 +1,4 @@
+Liste des codes d'erreur de sortie de programme ainsi que leur signification
+  - 1 La DDL de winsock est introuvable (WINDOWS UNIQUEMMENT)
+  - 2 Erreur lors du chargment du socket() (INVALID_SOCKET)
+  - 3 Client: connect() - Connexion échouée
