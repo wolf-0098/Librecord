@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (clientSocket == INVALID_SOCKET)
 	{
-		cout << "Erreur lors de la création de socket(): " << WSAGetLastError() << endl;
+		cout << "Erreur fatale lors de la création de socket(): " << WSAGetLastError() << endl;
 		WSACleanup();
 		return 2;
 	}
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	clientService.sin_port = htons(port);
 	if (connect(clientSocket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR)
 	{
-		cout << "Client: connect() - Connexion échouée" << endl;
+		cout << "Client erreur fatale: connect() - Connexion échouée" << endl;
 		WSACleanup();
 		return 3;
 	}
