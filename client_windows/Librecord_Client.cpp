@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
 	wsaerr = WSAStartup(wVersionRequested, &wsaData);
 	if (wsaerr != 0)
 	{
-		cout << "Error : Winsock dll NOT found ! " << endl;
-		return 0;
+		cout << "Erreur fatale : Winsock dll INtrouvable ! " << endl;
+		return 1;
 	}
 	else
 	{
@@ -38,13 +38,13 @@ int main(int argc, char* argv[])
 	clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (clientSocket == INVALID_SOCKET)
 	{
-		cout << "Error at socket(): " << WSAGetLastError() << endl;
+		cout << "Erreur lors de la création de socket(): " << WSAGetLastError() << endl;
 		WSACleanup();
-		return 0;
+		return 2;
 	}
 	else
 	{
-		cout << "socket() is OK !" << endl;
+		cout << "socket() OK !" << endl;
 	}
 
 	//ETAPE 3 : Connexion au serveur
@@ -54,14 +54,14 @@ int main(int argc, char* argv[])
 	clientService.sin_port = htons(port);
 	if (connect(clientSocket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR)
 	{
-		cout << "Client: connect() - Failed to connect" << endl;
+		cout << "Client: connect() - Connexion échouée" << endl;
 		WSACleanup();
-		return 0;
+		return 3;
 	}
 	else
 	{
-		cout << "Client : connect() is OK" << endl;
-		cout << "Client : Can start sending and receiving data... " << endl;
+		cout << "Client : connect() établi" << endl;
+		cout << "Client : début de la phase d'envoi et de reception des données" << endl;
 	}
 	system("pause");
 	WSACleanup();
