@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 	//ETAPE 4 : Mise en écoute du server 
 	if (listen(serverSocket, 1) == SOCKET_ERROR)
 		cout << "listen() : Erreur lors de l'écoute sur le socket" << WSAGetLastError() << endl;
-		// C'est pas une erreur fatale où il faut quitter le programme ça ?
+	// C'est pas une erreur fatale où il faut quitter le programme ça ?
 	else
 		cout << "listen() OK, en attente de connexions" << endl;
 
@@ -81,6 +81,20 @@ int main(int argc, char* argv[])
 		return 5;
 	}
 	cout << "Connexion acceptée" << endl;
+
+	//ETAPE 6 :  Parler au Client;
+	char buffer[200];
+	int bytesCount = recv(acceptSocket, buffer, 200, 0);
+	if (bytesCount > 0)
+	{
+		cout << "Message recu : " << buffer << endl;
+	}
+	else
+	{
+		WSACleanup();
+	}
+
+	//ETAPE 7 : Fermeture du socket
 	system("pause");
 	WSACleanup();
 
@@ -91,7 +105,7 @@ int main(int argc, char* argv[])
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
 // Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
 
-// Astuces pour bien démarrer : 
+// Astuces pour bien démarrer :  
 //   1. Utilisez la fenêtre Explorateur de solutions pour ajouter des fichiers et les gérer.
 //   2. Utilisez la fenêtre Team Explorer pour vous connecter au contrôle de code source.
 //   3. Utilisez la fenêtre Sortie pour voir la sortie de la génération et d'autres messages.
