@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
 	else
 		cout << "listen() OK, en attente de connexions" << endl;
 
-	int code(0);
+	bool code(false);
 	do
 	{
 		//ETAPE 5 : Acceptation de la connexion client 
@@ -83,16 +83,13 @@ int main(int argc, char* argv[])
 		{
 			cout << "Erreur fatale lors de l'acceptions de la connexion avec le client distant" << WSAGetLastError() << endl;
 			WSACleanup();
-			code = 1;
 		}
 		else
 		{
 			cout << "Connexion acceptée" << endl;
-			code = 0;
+			code = true;
 		}
-
-
-	} while (code != 0);
+	} while (code != true);
 
 	//ETAPE 6 :  Parler au Client;
 	char buffer[200];
