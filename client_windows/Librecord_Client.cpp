@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 	cout << "Bienvenue dans la version Client de Librecord." << endl;
 
 	//Connexion serveur/client : 
-	
+
 	//ETAPE 1  : initialisation de la librairie et téléchargement de la dll de Winsock
 	SOCKET clientSocket;
 	WSADATA wsaData;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	clientService.sin_port = htons(port);
 	if (connect(clientSocket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR)
 	{
-		cout << "Client erreur fatale: connect() - Connexion échouée" << endl;
+		cout << "Client erreur fatale: connect() - Connexion echouee" << endl;
 		WSACleanup();
 		return 3;
 	}
@@ -64,6 +64,23 @@ int main(int argc, char* argv[])
 		cout << "Client : connect() établi" << endl;
 		cout << "Client : début de la phase d'envoi et de reception des données" << endl;
 	}
+
+	//ETAPE 4 : Echanger avec le serveur 
+	char buffer[200];
+	cout << "Merci d'entrer un message a envoyer au serveur : " << endl;
+	cin.getline(buffer, 200);
+	int bytesCount = send(clientSocket, buffer, 200, 0);
+
+	if (bytesCount > 0)
+	{
+		cout << "Message envoye : " << buffer << endl;
+	}
+	else
+	{
+		WSACleanup();
+	}
+
+	//ETAPE 5 : Fermer le socket
 	system("pause");
 	WSACleanup();
 
