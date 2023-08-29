@@ -67,20 +67,32 @@ int main(int argc, char* argv[])
 
 	//ETAPE 4 : Mise en écoute du server 
 	if (listen(serverSocket, 1) == SOCKET_ERROR)
+	{
 		cout << "listen() : Erreur lors de l'écoute sur le socket" << WSAGetLastError() << endl;
-	// C'est pas une erreur fatale où il faut quitter le programme ça ?
+		return 5;
+	}
 	else
 		cout << "listen() OK, en attente de connexions" << endl;
 
-	//ETAPE 5 : Acceptation de la connexion client 
-	acceptSocket = accept(serverSocket, NULL, NULL);
-	if (acceptSocket == INVALID_SOCKET)
+	int code(0);
+	do
 	{
-		cout << "Erreur fatale lors de l'acceptions de la connexion avec le client distant" << WSAGetLastError() << endl;
-		WSACleanup();
-		return 5;
-	}
-	cout << "Connexion acceptée" << endl;
+		//ETAPE 5 : Acceptation de la connexion client 
+		acceptSocket = accept(serverSocket, NULL, NULL);
+		if (acceptSocket == INVALID_SOCKET)
+		{
+			cout << "Erreur fatale lors de l'acceptions de la connexion avec le client distant" << WSAGetLastError() << endl;
+			WSACleanup();
+			code = 1;
+		}
+		else
+		{
+			cout << "Connexion acceptée" << endl;
+			code = 0;
+		}
+
+
+	} while (code != 0);
 
 	//ETAPE 6 :  Parler au Client;
 	char buffer[200];
