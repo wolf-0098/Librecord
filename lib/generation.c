@@ -2,4 +2,6 @@
 #include <rnp/rnp.h>
 #include <string.h>
 
-int genClef(unsigned char *pseudo[], 
+int genClef(unsigned char *pseudo[], unsigned char *clefPub[], unsigned char *clefPriv[]){
+  
+}
