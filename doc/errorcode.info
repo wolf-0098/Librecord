@@ -3,4 +3,4 @@ Liste des codes d'erreur de sortie de programme ainsi que leur signification
   - 2 Erreur lors du chargment du socket() (INVALID_SOCKET)
   - 3 Client: connect() - Connexion échouée
   - 4 bind() échoué (serveur uniquemment)
-  - 5 Erreur fatale lors de l'acceptions de la connexion avec le client distant (serveur uniquemment)
+  - 5 listen() échoué (serveur uniquement)
