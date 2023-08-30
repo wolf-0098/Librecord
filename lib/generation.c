@@ -12,6 +12,10 @@ int genClef(unsigned char *pseudo[], unsigned char *clefPub[], unsigned char *cl
   
   RSA_KEY_DESC = malloc((sizeof(pseudo) + TJSONCLEF - 1)); /* -1 correspond au caractère de fin en trop */
 
+  if(RSA_KEY_DESC == NULL){
+    return -11;
+  }
+
   /*Ajout de la première partie du JSON */
   strcat(RSA_KEY_DESC, "{\
     'primary': {\
@@ -41,9 +45,12 @@ int genClef(unsigned char *pseudo[], unsigned char *clefPub[], unsigned char *cl
     }\
 }");
   printf("%s\n", RSA_KEY_DESC);
-  /* IL FAUT AJOUTER LES VERIFICATIONS POUR LE MALLOC ET LES STRCAT */
+
+  /* NE PAS OUBLIER D'AUGMENTER LE NIVEAU DU CHIFFREMENT QUAND LA FONCTION SERA OPERATIONNELLE */
 
 /* Fin de la création du JSON pour la clef */
+
+/* Génération de la clef RSA */
   
   free(RSA_KEY_DESC);
 }
